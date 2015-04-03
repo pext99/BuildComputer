@@ -1,0 +1,23 @@
+HTML radio buttons:
+	https://www.youtube.com/watch?v=IxrrjYo4cDY
+	
+HTML search bars:
+	https://www.youtube.com/watch?v=n8MmKgRHSsY
+	
+loading another page:
+	http://stackoverflow.com/questions/3682805/javascript-load-a-page-on-button-click
+	
+javascript tutorials:
+	https://www.youtube.com/watch?v=a0qDV0Nivfw
+	
+using the browser's local storage to transfer variable data:
+	https://www.youtube.com/watch?v=Jc_Yycz7MEc
+
+drop down list in javascript:
+	https://www.youtube.com/watch?v=rUjiGOct808
+	
+arrays in javascript:
+http://www.w3schools.com/js/js_arrays.asp
+
+function for converting URL text to Links to click on:
+http://www.jontetzlaff.com/blog/2012/08/23/converting-string-urls-to-clickable-links-with-javascript/

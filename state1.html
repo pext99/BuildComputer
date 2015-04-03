@@ -1,0 +1,92 @@
+<html>
+	<header>
+		<title>Build My Computer</title>
+	</header>
+
+	<body>
+
+		<center>
+			<P><H1>BUILD MY COMPUTER</H1></P>
+		</center>
+		
+		<P><H3>STEP 1: Choosing the functionality!</H3></P>
+		
+		<!--Making radio buttons for functionality-->
+		<div>
+			<center>
+				<form id = "formRadioButtons">
+				
+					<input name="functionality" type="radio" value="Gaming"/> Gaming
+					<input name="functionality" type="radio" value="Video Editing"/> Video Editing
+					<input name="functionality" type="radio" value="Streaming"/> Streaming
+					<input name="functionality" type="radio" value="Rendering Graphics"/> Rendering Graphics
+					<input name="functionality" type="radio" value="Servers"/> Servers
+					<input name="functionality" type="radio" value="Basic Use"/> Basic Use
+				
+				</form>
+			</center>
+		</div>
+		
+		<P><H3>STEP 2: Choosing your budget!</H3></P>
+		
+		<!-- 'budget: ' prompt-->
+		<center>
+			<form id = "formBudget">
+			Budget: <input name="budget" type="number" size="20">
+			</form>
+		</center>
+		
+		<!-- "Generate" button-->
+		<center>
+			<button type="button" onclick="state1Submit()"> Generate </button>
+		</center>
+		
+		<script>
+
+			function state1Submit(){
+				var formBudget, budget, formFunctionality, functionality, state2;
+				
+				formBudget = document.getElementById("formBudget");
+				budget = formBudget.elements["budget"].value;
+				
+				formFunctionality = document.getElementById("formRadioButtons");
+				functionality = formFunctionality.elements["functionality"].value;
+				
+				//storing functionality into local storage of browser
+				localStorage.setItem("function", functionality);
+				
+				//storing the budget into local storage of browser
+				localStorage.setItem("userBudget", budget);
+				
+				//this is the URL link for state 2 (after generate has been clicked)
+				state2 = "file:///C:/Users/Andrew/Desktop/My%20Webpage/state2.html?";
+				
+				
+				//first if clause checks to see if budget is 0 or below
+				//if you pass that first test, then the else if clauses will transfer you to state 2
+				if (budget <= 0){
+					document.getElementById("write").innerHTML = "Please enter a correct budget and select the functionality for your PC.";					
+				}else if(functionality == "Gaming"){
+					window.location.href = state2;
+				}else if(functionality == "Video Editing"){
+					window.location.href = state2;
+				}else if(functionality == "Streaming"){
+					window.location.href = state2;
+				}else if(functionality == "Rendering Graphics"){
+					window.location.href = state2;
+				}else if(functionality == "Servers"){
+					window.location.href = state2;
+				}else if(functionality == "Basic Use"){
+					window.location.href = state2;
+
+				}		
+			
+			}
+
+
+		</script>
+	
+		<p id="write"></p>
+
+	</body>
+</html>

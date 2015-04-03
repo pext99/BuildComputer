@@ -1,0 +1,229 @@
+<HTML>
+	<HEADER>
+		<TITLE>Build My Computer</TITLE>
+	</HEADER>
+	
+	
+	
+	<BODY>
+
+		<P><H3>STEP 3: Choosing the Parts!</H3></P>
+		<p><B>CPU:</B></P>
+		<form>
+		
+		<!--a list of CPU's the user can choose from, value is the price-->
+		<!--these are the drop down menus-->
+		<select id="CPUList" onchange="buildComputer()">
+			<option value=335>i7-4970k 4.4GHz 4-cores $335</option>
+			<option value=225>i5-4690k 3.5GHz 4-cores $225</option>
+			<option value=386>i7-5820k 3.3Ghz 6-cores $386</option>
+			<option value=578>i7-5930k 3.5GHz 6-cores $578</option>
+			<option value=210>AMD FX-8350 4.2GHz 8-cores $210</option>
+		</select>		
+		
+		<p><B>GPU:</B></p>
+		<select id="GPUList" onchange="buildComputer()">
+			<option value=330>GTX 970 4GB 1050MHz $330</option>
+			<option value=553>GTX 980 4GB 1126MHz $553</option>
+			<option value=310>R9 290x 4GB 1000MHz $310</option>
+			<option value=1146>GTX TITAN X 12GB 1000MHz $1146</option>
+			<option value=205>GTX 960 2GB 1127MHz $205</option>
+		</select>
+		
+		<p><B>MotherBoard:</B></p>
+		<select id="MBList" onchange="buildComputer()">
+			<option value=138>MSI ATX DDR3 $138</option>
+			<option value=67>Gigabyte AM3+ DDR3 $67</option>
+			<option value=307>ASUS ATX DDR3 $307</option>
+			<option value=120>ASUS PRO AM3+ $120</option>
+			<option value=60>ASUS Micro ATX DDR3 $60</option>
+		</select>
+		
+		<p><B>RAM:</B></p>
+		<p><select id="RAMList" onchange="buildComputer()"><p>
+			<option value=57>Crucial Ballistix Sport DDR3 8GB $57</option>
+			<option value=120>Corsair Vengeance DDR3 16GB $120</option>
+			<option value=63>Kingston HyperX Fury DDR3 8GB $63</option>
+			<option value=286>Corsair Vengeance Pro DDR3 32GB $286</option>
+			<option value=31>Crucial Single DDR3 4GB $31</option>
+		</select>		
+		
+		<p><B>Power Supply:</B></p>
+		<select id="PSList" onchange="buildComputer()">
+			<option value=80>Corsair CX 750W $80</option>
+			<option value=42>EVGA Gold 500W $42</option> 
+			<option value=40>Corsair CX 430W $40</option>
+			<option value=170>Corsair RM 1000W $170</option>
+			<option value=143>Corsair RM 750W $143</option>
+		</select>
+		
+		<p><B>Storage:</B></p>
+		<select id="STList" onchange="buildComputer()">
+			<option value=55>WD Blue 1TB $55</option>
+			<option value=105>WD Green 3TB $105</option>
+			<option value=195>Samsung 500GB SSD $195</option>
+			<option value=361>Samsung 1TB SSD $361</option>
+			<option value=210>Crucial 512GB SSD $210</option>
+		</select>
+		
+		<p><B>Computer Case:</B></p>
+		<p><select id="CSList" onchange="buildComputer()"><p>
+			<option value=78>Cooler Master HAF 912 MID $78</option>
+			<option value=173>Cooler Master CM Storm Trooper FULL $173</option>
+			<option value=43>Corsair Carbid Series SPEC-01 MID $43</option>
+			<option value=186>Corsair 780T FULL $186</option>
+			<option value=340>Corsair 900D FULL $340</option>
+		</select>		
+		
+		
+		</form>
+
+		
+		<!-- "Generate" button-->
+		<center>
+			<button type="button" onclick="state2Submit()"> Generate </button>
+		</center>
+		
+		
+		<p id="write"></p>
+		
+	</BODY>
+	
+	<script>
+	
+		document.getElementById("write").innerHTML = ("Total Budget: $");
+
+		function buildComputer(){
+
+			//load the user's selection of functionality and budget from state 1
+			var functionality = localStorage.getItem('function');
+			var budget = localStorage.getItem('userBudget');
+			
+			var CPUvalue = 0;
+			var GPUvalue = 0;
+			var MBvalue = 0;
+			var RAMvalue = 0;
+			var PSvalue = 0;
+			var STvalue = 0;
+			var CSvalue = 0;
+			
+					
+			//determine the recommended parts; each functionality will have it's own 'weighted' value for each component
+			//this will help generate a recommended computer component
+			if(functionality == "Gaming"){
+				var CPUvalue = (0.2*budget);
+				var GPUvalue = (0.4*budget);
+				var MBvalue = (0.1*budget);
+				var RAMvalue = (0.1*budget);
+				var PSvalue = (0.05*budget);
+				var STvalue = (0.05*budget);
+				var CSvalue = (0.1*budget);
+			}else if(functionality == "Video Editing"){
+				var CPUvalue = (0.3*budget);
+				var GPUvalue = (0.35*budget);
+				var MBvalue = (0.1*budget);
+				var RAMvalue = (0.1*budget);
+				var PSvalue = (0.05*budget);
+				var STvalue = (0.05*budget);
+				var CSvalue = (0.05*budget);
+			}else if(functionality == "Streaming"){
+				var CPUvalue = (0.4*budget);
+				var GPUvalue = (0.1*budget);
+				var MBvalue = (0.1*budget);
+				var RAMvalue = (0.25*budget);
+				var PSvalue = (0.05*budget);
+				var STvalue = (0.05*budget);
+				var CSvalue = (0.05*budget);
+			}else if(functionality == "Rendering Graphics"){
+				var CPUvalue = (0.2*budget);
+				var GPUvalue = (0.35*budget);
+				var MBvalue = (0.2*budget);
+				var RAMvalue = (0.1*budget);
+				var PSvalue = (0.05*budget);
+				var STvalue = (0.05*budget);
+				var CSvalue = (0.05*budget);
+			}else if(functionality == "Servers"){
+				var CPUvalue = (0.4*budget);
+				var GPUvalue = (0*budget);
+				var MBvalue = (0.3*budget);
+				var RAMvalue = (0.1*budget);
+				var PSvalue = (0.05*budget);
+				var STvalue = (0.1*budget);
+				var CSvalue = (0.05*budget);
+			}else if(functionality == "Basic Use"){
+				var CPUvalue = (0.4*budget);
+				var GPUvalue = (0.2*budget);
+				var MBvalue = (0.1*budget);
+				var RAMvalue = (0.05*budget);
+				var PSvalue = (0.05*budget);
+				var STvalue = (0.1*budget);
+				var CSvalue = (0.1*budget);
+			}
+			
+			//gets the list of each component
+			var CPUlist = document.getElementById("CPUList");
+			var GPUlist = document.getElementById("GPUList");
+			var MBlist = document.getElementById("MBList");			
+			var RAMlist = document.getElementById("RAMList");
+			var PSlist = document.getElementById("PSList");
+			var STlist = document.getElementById("STList");
+			var CSlist = document.getElementById("CSList");
+			
+			//getting the assigned price of each component
+			var cpu = CPUlist.options[CPUlist.selectedIndex].value;
+			var gpu = GPUlist.options[GPUlist.selectedIndex].value;
+			var mb = MBlist.options[MBlist.selectedIndex].value;
+			var ram = RAMlist.options[RAMlist.selectedIndex].value;
+			var ps = PSlist.options[PSlist.selectedIndex].value;
+			var st = STlist.options[STlist.selectedIndex].value;
+			var cs = CSlist.options[CSlist.selectedIndex].value;
+			
+			//sum is the total cost of the computer, '+' sign is to convert string to int
+			var sum = (+cpu) + (+gpu) + (+mb) + (+ram) + (+ps) + (+st) + (+cs);
+			document.getElementById("write").innerHTML = ("Total Cost: $" + sum + ("<br>") + ("<br>") + "Cost estimation of each component: " + ("<br>CPU: $") + CPUvalue + ("0<br>GPU: $") + GPUvalue + ("0<br>Motherboard: $") + MBvalue + ("0<br>RAM: $") + RAMvalue + ("0<br>Power Supply: $") + PSvalue + ("0<br>Storage: $") + STvalue + ("0<br>Computer Case: $") + CSvalue + "0" );
+			
+		}
+		
+		//when the generate button is clicked, this function is called
+		//it stores the components that were selected by the user and goes to state 4
+		function state2Submit(){
+				var state4;
+
+				//getting the selected component's names stored in the browser's local storage
+				var CPUlist = document.getElementById("CPUList");
+				var CPUname = CPUlist.options[CPUlist.selectedIndex].text;
+				
+				var GPUlist = document.getElementById("GPUList");
+				var GPUname = GPUlist.options[GPUlist.selectedIndex].text;
+				
+				var MBlist = document.getElementById("MBList");
+				var MBname = MBlist.options[MBlist.selectedIndex].text;
+				
+				var RAMlist = document.getElementById("RAMList");
+				var RAMname = RAMlist.options[RAMlist.selectedIndex].text;
+				
+				var PSlist = document.getElementById("PSList");
+				var PSname = PSlist.options[PSlist.selectedIndex].text;
+				
+				var STlist = document.getElementById("STList");
+				var STname = STlist.options[STlist.selectedIndex].text;
+				
+				var CSlist = document.getElementById("CSList");
+				var CSname = CSlist.options[CSlist.selectedIndex].text;
+				
+				localStorage.setItem("CPU", CPUname);
+				localStorage.setItem("GPU", GPUname);
+				localStorage.setItem("MB", MBname);
+				localStorage.setItem("RAM", RAMname);
+				localStorage.setItem("PS", PSname);
+				localStorage.setItem("ST", STname);
+				localStorage.setItem("CS", CSname);
+				
+				//moving onto state 4
+				state4 = "file:///C:/Users/Andrew/Desktop/My%20Webpage/state4.html";
+				window.location.href = state4;
+			}
+			
+	</script>
+
+</HTML>

@@ -1,0 +1,175 @@
+<html>
+	<header>
+		<title>Build My Computer</title>
+	</header>
+
+	<script>
+		//get the components the user has picked and store them inside variables
+		//counter will be the index number of each component that is located in both arrays (for name and for URL link)
+		var counter = 0;
+		var CPU = localStorage.getItem('CPU');
+		var GPU = localStorage.getItem('GPU');
+		var MB = localStorage.getItem('MB');
+		var RAM = localStorage.getItem('RAM');
+		var PS = localStorage.getItem('PS');
+		var ST = localStorage.getItem('ST');
+		var CS = localStorage.getItem('CS');
+		
+		//list of all the parts in an array
+		var PartsList = 
+		["i7-4970k 4.4GHz 4-cores $335", //CPUs
+		"i5-4690k 3.5GHz 4-cores $225",
+		"i7-5820k 3.3Ghz 6-cores $386",
+		"i7-5930k 3.5GHz 6-cores $578",
+		"AMD FX-8350 4.2GHz 8-cores $210",
+		"GTX 970 4GB 1050MHz $330", //GPUs
+		"GTX 980 4GB 1126MHz $553",
+		"R9 290x 4GB 1000MHz $310",
+		"GTX TITAN X 12GB 1000MHz $1146",
+		"GTX 960 2GB 1127MHz $205",
+		"MSI ATX DDR3 $138", //Motherboards
+		"Gigabyte AM3+ DDR3 $67",
+		"ASUS ATX DDR3 $307",
+		"ASUS PRO AM3+ $120",
+		"ASUS Micro ATX DDR3 $60",
+		"Crucial Ballistix Sport DDR3 8GB $57", //RAM sticks
+		"Corsair Vengeance DDR3 16GB $120",
+		"Kingston HyperX Fury DDR3 8GB $63",
+		"Corsair Vengeance Pro DDR3 32GB $286",
+		"Crucial Single DDR3 4GB $31",
+		"Corsair CX 750W $80", //Power Supplies
+		"EVGA Gold 500W $42",
+		"Corsair CX 430W $40",
+		"Corsair RM 1000W $170",
+		"Corsair RM 750W $143",
+		"WD Blue 1TB $55", //Storage Drives
+		"WD Green 3TB $105",
+		"Samsung 500GB SSD $195",
+		"Samsung 1TB SSD $361",
+		"Crucial 512GB SSD $210",
+		"Cooler Master HAF 912 MID $78", //Computer Cases
+		"Cooler Master CM Storm Trooper FULL $173",
+		"Corsair Carbid Series SPEC-01 MID $43",
+		"Corsair 780T FULL $186",
+		"Corsair 900D FULL $340",
+		];
+		
+		//array of URL links for each component, the index of this array correlates with the index of the array above, so PartsList[0] will have it's URL link in URL[0]
+		var URL = 
+		["http://www.amazon.com/Intel-i7-4790K-Processor-Cache-BX80646I74790K/dp/B00KPRWAX8/ref=sr_1_1?ie=UTF8&qid=1428011748&sr=8-1&keywords=it4790k", //CPUs
+		"http://www.amazon.com/Intel-Core-i5-4690K-Processor-BX80646I54690K/dp/B00KPRWB9G/ref=sr_1_1?ie=UTF8&qid=1428012627&sr=8-1&keywords=i54690k",
+		"http://www.amazon.com/Intel-i7-5820K-Haswell-E-Processor-BX80648I75820K/dp/B00MMLXIKY/ref=sr_1_1?ie=UTF8&qid=1428012824&sr=8-1&keywords=i7+5820",
+		"http://www.amazon.com/Intel-i7-5930K-Haswell-E-Processor-BX80648I75930K/dp/B00MMLXMM8/ref=sr_1_1?ie=UTF8&qid=1428012984&sr=8-1&keywords=i7+5930k",
+		"http://www.amazon.com/AMD-FD8350FRHKBOX-FX-8350-8-Core-Processor/dp/B009O7YUF6/ref=sr_1_1?ie=UTF8&qid=1428013030&sr=8-1&keywords=AMD+FX-8350",
+		"http://www.amazon.com/EVGA-GeForce-256bit-Graphics-04G-P4-2972-KR/dp/B00NVODXME/ref=sr_1_fkmr0_1?ie=UTF8&qid=1428013051&sr=8-1-fkmr0&keywords=GTX+970+4GB+1050MHz+%24330", //GPUs
+		"http://www.amazon.com/EVGA-GTX-GDDR5-Graphics-Card/dp/B00NT9UT3M/ref=sr_1_1?s=pc&ie=UTF8&qid=1428013098&sr=1-1&keywords=GTX+980",
+		"http://www.amazon.com/XFX-Dissipation-R9-290X-EDFD-512-Bit-CrossFireX/dp/B00HHIPN5A/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013113&sr=1-1&keywords=R9+290x",
+		"http://www.amazon.com/EVGA-GeForce-384bit-Graphics-12G-P4-2990-KR/dp/B00UVN21RQ/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013161&sr=1-1&keywords=GTX+TITAN+X",
+		"http://www.amazon.com/EVGA-GeForce-Dual-Link-Graphics-02G-P4-2966-KR/dp/B00SC6HAS4/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013188&sr=1-1&keywords=GTX+960",
+		"http://www.amazon.com/MSI-DDR3-Motherboards-Z97-G45-GAMING/dp/B00K23BYCI/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013207&sr=1-1&keywords=MSI+ATX", //Motherboards
+		"http://www.amazon.com/Gigabyte-DDR3-Micro-Motherboard-GA-78LMT-USB3/dp/B009FC3YJ8/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013220&sr=1-1&keywords=Gigabyte+AM3%2B",
+		"http://www.amazon.com/ASUS-Motherboard-MAXIMUS-VII-FORMULA/dp/B00M5DUVT0/ref=sr_1_6?s=electronics&ie=UTF8&qid=1428013262&sr=1-6&keywords=ASUS+ATX+ddr3",
+		"http://www.amazon.com/M5A99FX-PRO-R2-0-990FX-Motherboard/dp/B008B6ONXK/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013279&sr=1-1&keywords=ASUS+PRO+AM3%2B",
+		"http://www.amazon.com/ASUS-Micro-Motherboard-M5A78L-M-USB3/dp/B00DQO9L1Q/ref=sr_1_3?s=electronics&ie=UTF8&qid=1428013295&sr=1-3&keywords=ASUS+Micro+ATX",
+		"http://www.amazon.com/Crucial-Ballistix-PC3-12800-BLS2KIT4G3D1609DS1S00-BLS2CP4G3D1609DS1S00/dp/B006WAGGUK/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013320&sr=1-1&keywords=Crucial+Ballistix+Sport", //RAM Sticks
+		"http://www.amazon.com/Corsair-Vengeance-Desktop-Memory-CMZ16GX3M2A1600C10/dp/B006EWUO22/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013352&sr=1-1&keywords=Corsair+Vengeance",
+		"http://www.amazon.com/Kingston-HyperX-FURY-2x4GB-1600MHz/dp/B00J8E93G6/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013366&sr=1-1&keywords=Kingston+HyperX+Fury",
+		"http://www.amazon.com/Corsair-Vengeance-2400MHz-Memory-CMY32GX3M4A2400C11R/dp/B00GM83C86/ref=sr_1_12?s=electronics&ie=UTF8&qid=1428013379&sr=1-12&keywords=Corsair+Vengeance+Pro",
+		"http://www.amazon.com/Crucial-Ballistix-Profile-DDR3-1600-BLS8G3D1609ES2LX0/dp/B00A14ZTWE/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013397&sr=1-1&keywords=Crucial+Single",
+		"http://www.amazon.com/Corsair-Modular-Bronze-ATX12V-EPS12V/dp/B00ALK3KEM/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013414&sr=1-1&keywords=Corsair+CX+750W", //Power Supplies
+		"http://www.amazon.com/EVGA-80PLUS-Certified-ATX12V-100-W1-0500-KR/dp/B00H33SFJU/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013501&sr=1-1&keywords=evga+500w",
+		"http://www.amazon.com/Corsair-Builder-EPS%C2%A080-certified-Power/dp/B0092ML1SC/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013529&sr=1-1&keywords=Corsair+CX+430W",
+		"http://www.amazon.com/Corsair-80PLUS-Gold-Certified-Power-Supply/dp/B00EB7UIZU/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013541&sr=1-1&keywords=Corsair+RM+1000W",
+		"http://www.amazon.com/Corsair-80PLUS-Gold-Certified-Power-Supply/dp/B00EB7UITQ/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013552&sr=1-1&keywords=Corsair+RM+750W",
+		"http://www.amazon.com/Blue-SATA-7200rpm-Internal-Drive/dp/B0088PUEPK/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013564&sr=1-1&keywords=WD+Blue+1TB", //Storage Drives
+		"http://www.amazon.com/Western-Digital-Caviar-Green-Desktop/dp/B004RORMF6/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013575&sr=1-1&keywords=WD+Green+3TB",
+		"http://www.amazon.com/Samsung-2-5-Inch-Internal-MZ-75E500B-AM/dp/B00OBRE5UE/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013589&sr=1-1&keywords=Samsung+500GB+SSD",
+		"http://www.amazon.com/Samsung-2-5-Inch-Internal-MZ-75E1T0B-AM/dp/B00OBRFFAS/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013606&sr=1-1&keywords=Samsung+1TB+SSD",
+		"http://www.amazon.com/Crucial-MX100-2-5-Inch-Internal-CT512MX100SSD1/dp/B00KFAGCUM/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013623&sr=1-1&keywords=Crucial+512GB+SSD",
+		"http://www.amazon.com/Cooler-Master-HAF-912-Computer/dp/B00BCXF6O4/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013635&sr=1-1&keywords=Cooler+Master+HAF+912", //Computer Cases
+		"http://www.amazon.com/Cooler-Master-Trooper-Rev-Computer/dp/B00GN5IKA8/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013655&sr=1-1&keywords=Cooler+Master+CM+Storm+Trooper",
+		"http://www.amazon.com/Corsair-Carbide-SPEC-02-Gaming-CC-9011051-WW/dp/B00I0MKMG2/ref=sr_1_sc_1?s=electronics&ie=UTF8&qid=1428013669&sr=1-1-spell&keywords=Corsair+Carbid+Series+SPEC-01",
+		"http://www.amazon.com/Corsair-Graphite-780T-Full-Tower/dp/B00LA6ZLGQ/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013682&sr=1-1&keywords=Corsair+780T",
+		"http://www.amazon.com/Corsair-Obsidian-Super-Computer-CC-9011022-WW/dp/B00B1R8JT0/ref=sr_1_1?s=electronics&ie=UTF8&qid=1428013696&sr=1-1&keywords=Corsair+900D",
+		];
+		
+		//title
+		document.write("<p>" + "<H3>" + "STEP 4: Buying your PC!" + "</H3>" + "</p>");
+		
+		//prints the component prompt as well as the links for each component
+		document.write("<B>" + "CPU:" + "<br>" + "</B>"); //CPU
+		while(CPU != PartsList[counter]){
+			counter++;
+		}
+		document.write(convertToLinks(URL[counter]) + "<br>" + "<br>");
+		counter = 0;
+		
+		document.write("<B>" + "GPU:" + "<br>" + "</B>"); //GPU
+		while(GPU != PartsList[counter]){
+			counter++;
+		}	
+		document.write(convertToLinks(URL[counter]) + "<br>" + "<br>"); 
+		counter = 0;
+		
+		document.write("<B>" + "Motherboard:" + "<br>" + "</B>"); //Motherboard
+		while(MB != PartsList[counter]){
+			counter++;
+		}	
+		document.write(convertToLinks(URL[counter]) + "<br>" + "<br>");
+		counter = 0;
+		
+		document.write("<B>" + "RAM:" + "<br>" + "</B>"); //RAM
+		while(RAM != PartsList[counter]){
+			counter++;
+		}	
+		document.write(convertToLinks(URL[counter]) + "<br>" + "<br>");
+		counter = 0;
+		
+		document.write("<B>" + "Power Supply:" + "<br>" + "</B>"); //Power Supply
+		while(PS != PartsList[counter]){
+			counter++;
+		}	
+		document.write(convertToLinks(URL[counter]) + "<br>" + "<br>");
+		counter = 0;
+		
+		document.write("<B>" + "Storage Drive:" + "<br>" + "</B>"); //Storage Drive
+		while(ST != PartsList[counter]){
+			counter++;
+		}	
+		document.write(convertToLinks(URL[counter]) + "<br>" + "<br>");
+		counter = 0;
+		
+		document.write("<B>" + "Computer Case:" + "<br>" + "</B>"); //Computer Case
+		while(CS != PartsList[counter]){
+			counter++;
+		}	
+		document.write(convertToLinks(URL[counter]) + "<br>" + "<br>");
+		counter = 0;
+		
+		//function to convert the URL text to Link
+		function convertToLinks(text) {
+			var replaceText, replacePattern1;
+			 
+			//URLs starting with http://, https://
+			replacePattern1 = /(\b(https?):\/\/[-A-Z0-9+&amp;@#\/%?=~_|!:,.;]*[-A-Z0-9+&amp;@#\/%=~_|])/ig;
+			replacedText = text.replace(replacePattern1, '<a class="colored-link-1" title="$1" href="$1" target="_blank">$1</a>');
+			 
+			return replacedText;
+		}
+		
+		function state4Submit(){
+			state1 = "file:///C:/Users/Andrew/Desktop/My%20Webpage/state1.html"
+			window.location.href = state1;
+		}
+		
+		
+	</script>
+	
+	<body>
+		<!-- "Generate" button-->
+		<center>
+			<button type="button" onclick="state4Submit()"> Reset </button>
+		</center>
+
+	</body>
+</html>
