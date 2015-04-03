@@ -21,3 +21,6 @@ http://www.w3schools.com/js/js_arrays.asp
 
 function for converting URL text to Links to click on:
 http://www.jontetzlaff.com/blog/2012/08/23/converting-string-urls-to-clickable-links-with-javascript/
+
+how to find current directory path:
+http://stackoverflow.com/questions/296873/basic-html-how-to-set-relative-path-to-current-folder
