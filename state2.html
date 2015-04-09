@@ -92,9 +92,7 @@
 	<script>
 	
 		document.getElementById("write").innerHTML = ("Total Budget: $");
-
 		function buildComputer(){
-
 			//load the user's selection of functionality and budget from state 1
 			var functionality = localStorage.getItem('function');
 			var budget = localStorage.getItem('userBudget');
@@ -180,7 +178,7 @@
 			
 			//sum is the total cost of the computer, '+' sign is to convert string to int
 			var sum = (+cpu) + (+gpu) + (+mb) + (+ram) + (+ps) + (+st) + (+cs);
-			document.getElementById("write").innerHTML = ("Total Cost: $" + sum + ("<br>") + ("<br>") + "Cost estimation of each component: " + ("<br>CPU: $") + CPUvalue + ("0<br>GPU: $") + GPUvalue + ("0<br>Motherboard: $") + MBvalue + ("0<br>RAM: $") + RAMvalue + ("0<br>Power Supply: $") + PSvalue + ("0<br>Storage: $") + STvalue + ("0<br>Computer Case: $") + CSvalue + "0" );
+			document.getElementById("write").innerHTML = ("Total Cost: $" + sum + ("<br>") + ("<br>") + "Cost estimation of each component: " + ("<br>CPU: $") + parseFloat(CPUvalue.toFixed(3)) + ("0<br>GPU: $") + parseFloat(GPUvalue.toFixed(3)) + ("0<br>Motherboard: $") + parseFloat(MBvalue.toFixed(3)) + ("0<br>RAM: $") + parseFloat(RAMvalue.toFixed(3)) + ("0<br>Power Supply: $") + parseFloat(PSvalue.toFixed(3)) + ("0<br>Storage: $") + parseFloat(STvalue.toFixed(3)) + ("0<br>Computer Case: $") + parseFloat(CSvalue.toFixed(3)) + "0" );
 			
 		}
 		
@@ -188,7 +186,6 @@
 		//it stores the components that were selected by the user and goes to state 4
 		function state2Submit(){
 				var state4;
-
 				//getting the selected component's names stored in the browser's local storage
 				var CPUlist = document.getElementById("CPUList");
 				var CPUname = CPUlist.options[CPUlist.selectedIndex].text;
